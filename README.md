@@ -1,6 +1,6 @@
 # Canary in a Coalmine: Better Membership Inference with Ensembled Adversarial Queries
 
-This code is the official implementation of [Canary in a Coalmine](paper).
+This code is the official implementation of [Canary in a Coalmine](https://arxiv.org/abs/2210.10750).
 
 If you have any questions, feel free to email Yuxin (<ywen@umd.edu>).
 
