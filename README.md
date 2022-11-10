@@ -18,7 +18,7 @@ bash shadow_models.sh
 ### 2. Perform attack:
 baseline:
 ```
-python gen_canary.py --name wrn28-10 --save_name wrn28-10_baseline --aug_strategy baseline --num_shadow 65 --num_aug 10 --no_dataset_aug --start 0 --end 5000
+python gen_canary.py --name wrn28-10 --save_name wrn28-10_baseline --aug_strategy baseline --num_shadow 65 --num_aug 10 --start 0 --end 5000
 ```
 
 Canary online:
