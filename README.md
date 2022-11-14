@@ -23,7 +23,7 @@ python gen_canary.py --name wrn28-10 --save_name wrn28-10_baseline --aug_strateg
 
 Canary online:
 ```
-python gen_canary.py --name wrn28-10 --save_name wrn28-10_online --num_shadow 65 --iter 30 --stochastic_k 2 --lr 0.05 --weight_decay 0.001 --init target_img --opt adam --in_model_loss target_logits --out_model_loss target_logits --target_logits 10 0 --aug_strategy try_random_out_class --num_gen 10 --num_aug 10 --start 0 --end 5000
+python gen_canary.py --name wrn28-10 --save_name wrn28-10_online --num_shadow 65 --iter 50 --stochastic_k 2 --lr 0.005 --init target_img --opt adam --in_model_loss target_logits --out_model_loss target_logits --target_logits 10 0 --aug_strategy try_random_out_class --num_gen 10 --num_aug 10 --start 0 --end 5000
 ```
 
 Canary offline:
@@ -31,4 +31,8 @@ Canary offline:
 python gen_canary.py --name wrn28-10 --save_name wrn28-10_offline --offline --num_shadow 65 --iter 30 --stochastic_k 2 --lr 0.05 --weight_decay 0.001 --init target_img --opt adam --in_model_loss target_logits --out_model_loss target_logits --target_logits 10 0 --stop_loss 25 --aug_strategy try_random_out_class --num_gen 10 --num_aug 10 --start 0 --end 5000
 ```
 
-Note: you may always disable wandb by adding ```--nowandb```.
+Note: you may disable wandb by adding ```--nowandb```.
+
+For online scenario, you can check ```fix_TPR@0.1FPR``` and ```fix_auc```.
+For offline scenario, you can check ```fix_off_TPR@0.1FPR``` and ```fix_off_auc```.
+
