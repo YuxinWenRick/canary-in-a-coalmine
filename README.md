@@ -34,5 +34,6 @@ python gen_canary.py --name wrn28-10 --save_name wrn28-10_offline --offline --nu
 Note: you may disable wandb by adding ```--nowandb```.
 
 For online scenario, you can check ```fix_TPR@0.1FPR``` and ```fix_auc```.
+
 For offline scenario, you can check ```fix_off_TPR@0.1FPR``` and ```fix_off_auc```.
 
