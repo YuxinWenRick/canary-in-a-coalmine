@@ -39,7 +39,8 @@ For online scenario, you can check ```fix_TPR@0.01FPR``` and ```fix_auc```.
 
 For offline scenario, you can check ```fix_off_TPR@0.01FPR``` and ```fix_off_auc```.
 
-If you want to push AUC higher (with a slight loss in TPR@0.01FPR) you can try: 
+If you want to push ```AUC``` higher (with a slight loss in ```TPR@0.01FPR```) you can try: 
+
 Canary online:
 ```
 python gen_canary.py --name wrn28-10 --save_name wrn28-10_online --num_shadow 64 --stop_loss 1 --iter 30 --stop_loss 25 --stochastic_k 2 --lr 0.009 --weight_decay 0.001 --init target_img --opt adam --in_model_loss target_logits --out_model_loss target_logits --target_logits 10 0 --aug_strategy try_random_out_class --num_gen 10 --num_aug 10 --start 0 --end 5000
