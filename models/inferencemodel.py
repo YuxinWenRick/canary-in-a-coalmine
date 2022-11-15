@@ -17,8 +17,12 @@ class InferenceModel(nn.Module):
         self.shadow_id = shadow_id
         self.args = args
         
-        resume_checkpoint = f'saved_models/{self.args.name}/{self.args.name}_{self.shadow_id}_last.pth'
-
+        if self.shadow_id == -1:
+            # -1 for target model
+            resume_checkpoint = f'saved_models/{self.args.name}/{self.args.name}_target_last.pth'
+        else:
+            resume_checkpoint = f'saved_models/{self.args.name}/{self.args.name}_shadow_{self.shadow_id}_last.pth'
+        
         assert os.path.isfile(resume_checkpoint), 'Error: no checkpoint found!'
         checkpoint = torch.load(resume_checkpoint)
         if 'model_arch' in checkpoint:

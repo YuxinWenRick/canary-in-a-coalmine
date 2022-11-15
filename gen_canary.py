@@ -128,6 +128,8 @@ def generate_canary_one_shot(shadow_models, args, return_loss=False):
         optimizer = torch.optim.Adam([x], lr=args.lr, weight_decay=args.weight_decay)
     elif args.opt.lower() in ['sgd', 'signsgd']:
         optimizer = torch.optim.SGD([x], lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay, nesterov=args.nesterov)
+    elif args.opt.lower() in ['adamw']:
+        optimizer = torch.optim.AdamW([x], lr=args.lr, weight_decay=args.weight_decay)
 
     if args.scheduling:
         scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[args.iter // 2.667, args.iter // 1.6,
@@ -267,7 +269,7 @@ def main(args):
         curr_model = InferenceModel(i, args).to(args.device)
         shadow_models.append(curr_model)
 
-    target_model = shadow_models.pop(random.randrange(len(shadow_models)))
+    target_model = InferenceModel(-1, args).to(args.device)
 
     args.target_model = target_model
     args.shadow_models = shadow_models

@@ -395,14 +395,14 @@ def cal_results(shadow_scores, shadow_in_out_labels, target_scores, target_in_ou
     fpr, tpr, auc, acc, low = cal_stats(logits_mul * final_preds, true_labels)
     some_stats['fix_auc'] = auc
     some_stats['fix_acc'] = acc
-    some_stats['fix_TPR@0.1FPR'] = low
+    some_stats['fix_TPR@0.01FPR'] = low
 
     final_preds, true_labels = lira_offline(shadow_scores, shadow_in_out_labels, target_scores, target_in_out_labels,
                                         fix_variance=True)
     fpr, tpr, auc, acc, low = cal_stats(logits_mul * final_preds, true_labels)
     some_stats['fix_off_auc'] = auc
     some_stats['fix_off_acc'] = acc
-    some_stats['fix_off_TPR@0.1FPR'] = low
+    some_stats['fix_off_TPR@0.01FPR'] = low
 
     return some_stats
 

@@ -44,15 +44,17 @@ parser.add_argument('--patch', default=4, type=int, help="patch for ViT")
 parser.add_argument('--dimhead', default=512, type=int)
 parser.add_argument('--convkernel', default=8, type=int, help="parameter for convmixer")
 parser.add_argument('--name', default='test')
-parser.add_argument('--num_shadow', default=65, type=int)
+parser.add_argument('--num_shadow', default=None, type=int)
 parser.add_argument('--shadow_id', default=None, type=int)
 parser.add_argument('--seed', default=0, type=int)
 parser.add_argument('--pkeep', default=0.5, type=float)
 
 args = parser.parse_args()
 
-# modify args
-args.job_name = args.name + f'_{args.shadow_id}'
+if args.num_shadow is not None:	
+    args.job_name = args.name + f'_shadow_{args.shadow_id}'	
+else:	
+    args.job_name = args.name + '_target'
 
 # take in args
 usewandb = not args.nowandb
@@ -122,11 +124,17 @@ if args.num_total:
 set_random_seed(args.seed)
 
 # get shadow dataset
-keep = np.random.uniform(0, 1, size=(args.num_shadow, dataset_size))
-order = keep.argsort(0)
-keep = order < int(args.pkeep * args.num_shadow)
-keep = np.array(keep[args.shadow_id], dtype=bool)
-keep = keep.nonzero()[0]
+if args.num_shadow is not None:
+    # get shadow dataset
+    keep = np.random.uniform(0, 1, size=(args.num_shadow, dataset_size))
+    order = keep.argsort(0)
+    keep = order < int(args.pkeep * args.num_shadow)
+    keep = np.array(keep[args.shadow_id], dtype=bool)
+    keep = keep.nonzero()[0]
+else:
+    # get target dataset
+    keep = np.random.choice(dataset_size, size=int(args.pkeep * dataset_size), replace=False)
+    keep.sort()
 
 keep_bool = np.full((dataset_size), False)
 keep_bool[keep] = True
