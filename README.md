@@ -20,7 +20,7 @@ Or, you can create a directory ```saved_models```, and then download our pre-tra
 ### 2. Perform attack:
 baseline (LiRA):
 ```
-python gen_canary.py --name wrn28-10 --save_name wrn28-10_baseline --aug_strategy baseline --num_shadow 65 --num_aug 10 --start 0 --end 5000
+python gen_canary.py --name wrn28-10 --save_name wrn28-10_baseline --aug_strategy baseline --num_shadow 64 --num_aug 10 --start 0 --end 5000
 ```
 
 Canary online:
